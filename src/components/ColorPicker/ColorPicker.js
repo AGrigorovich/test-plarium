@@ -1,11 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import SelectBasicColors from '../SelectBasicColors/SelectBasicColors';
+import ChangeColors from '../ChangeColors/ChangeColors';
+
 import './ColorPicker.css';
 
 const ColorPicker = ({ value, onChange, colors }) => {
 	return <div className="color-picker">
-		<span>{value}</span>
+		<span className="color-identification">{value}</span>
+		<ChangeColors />
+		<SelectBasicColors />
 	</div>
 };
 

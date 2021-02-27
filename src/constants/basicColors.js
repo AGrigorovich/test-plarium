@@ -1,4 +1,4 @@
-export const colors = [
+export const basicColors = [
 	{ id: 0, name: 'white', value: '#ffffff' },
 	{ id: 1, name: 'black', value: '#000000' },
 	{ id: 2, name: 'red', value: '#ff0000' },

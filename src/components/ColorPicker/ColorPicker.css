@@ -1,10 +1,23 @@
 .color-picker {
     width: 15rem;
     height: 3rem;
-    border: .1rem solid #000000;
+    border: .25rem solid #000000;
     border-radius: .25rem;
     display: flex;
     align-items: center;
-    padding: .25rem;
-    color: grey;
+    color: #808080;
+}
+
+.color-picker .color-identification {
+    width: 7rem;
+    padding: .5rem;
+}
+
+.color-picker .color-picker-rows {
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-left: 1px solid #808080;
 }

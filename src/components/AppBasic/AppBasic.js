@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 
 import ColorPicker from '../ColorPicker/ColorPicker';
 
-import { colors } from '../../constants/colors';
+// better way is to import basicColors directly in component, but this one of task requirements
+import { basicColors } from '../../constants/basicColors';
 
 import './AppBasic.css';
 
@@ -12,7 +13,7 @@ const AppBasic = () => {
 		<ColorPicker
 			value={backgroundColor}
 			onChange={changedBackgroundColor}
-			colors={colors}
+			colors={basicColors}
 		/>
 	</div>
 }
