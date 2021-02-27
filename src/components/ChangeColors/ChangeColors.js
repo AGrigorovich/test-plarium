@@ -19,10 +19,16 @@ const ChangeColors = ({ value, onChange }) => {
 
 	const detectRGBColor = () => `rgba(${colorRedValue},${colorGreenValue},${colorBlueValue})`;
 
+	const convertNumberToHEXValue = number => {
+		const hex = number.toString(16);
+		return hex.length === 1 ? "0" + hex : hex;
+	}
+
 	const detectHEXColor = () => {
-		const red = colorRedValue.toString(16);
-		const green = colorGreenValue.toString(16);
-		const blue = colorBlueValue.toString(16);
+		const red = convertNumberToHEXValue(colorRedValue);
+		const green = convertNumberToHEXValue(colorGreenValue);
+		const blue = convertNumberToHEXValue(colorBlueValue);
+
 		return `#${red}${green}${blue}`;
 	};
 
@@ -44,7 +50,7 @@ const ChangeColors = ({ value, onChange }) => {
 			default: return '';
 		}
 	}
-	const detectFunction = (value, color) => {
+	const detectHandlerFunction = (value, color) => {
 		switch(color){
 			case 'red': return changedColorRed(value);
 			case 'green': return changedColorGreen(value);
@@ -85,7 +91,7 @@ const ChangeColors = ({ value, onChange }) => {
 							max={255}
 							step={1}
 							value={detectValue(value)}
-							onChange={event => detectFunction(event.target.value, value)}
+							onChange={event => detectHandlerFunction(event.target.valueAsNumber, value)}
 						/>
 					</div>
 				))}
@@ -103,6 +109,7 @@ const ChangeColors = ({ value, onChange }) => {
 				</div>
 	</>);
 
+	console.log('detectRGBColor():::', detectRGBColor())
 	return(
 		<div className="color-picker-rows">
 			<div

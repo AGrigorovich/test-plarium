@@ -6,7 +6,8 @@
 .input-range-item {
     display: flex;
     align-items: center;
-    padding: .75rem .5rem;
+    justify-content: space-between;
+    padding: 1rem;
 }
 
 .change-colors-buttons-container {
