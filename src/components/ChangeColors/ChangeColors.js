@@ -6,6 +6,7 @@ import AppColorSquare from "../AppColorSquare/AppColorSquare";
 import AppButton from "../AppButton/AppButton";
 
 import { clickable } from '../../helpers/makeElementClickable';
+import { convertHexToRgb, convertRgbToHex } from '../../helpers/colorConverters';
 import { colorRanges } from '../../constants/colorRanges';
 
 import './ChangeColors.css';
@@ -17,29 +18,13 @@ const ChangeColors = ({ value, onChange }) => {
 	const [colorBlueValue, changedColorBlue] = useState(0);
 	const changeColorRef = useRef(null);
 
-	const detectRGBColor = () => `rgba(${colorRedValue},${colorGreenValue},${colorBlueValue})`;
-
-	const convertNumberToHEXValue = number => {
-		const hex = number.toString(16);
-		return hex.length === 1 ? "0" + hex : hex;
-	}
-
-	const detectHEXColor = () => {
-		const red = convertNumberToHEXValue(colorRedValue);
-		const green = convertNumberToHEXValue(colorGreenValue);
-		const blue = convertNumberToHEXValue(colorBlueValue);
-
-		return `#${red}${green}${blue}`;
-	};
+	const detectHEXColor = () => convertRgbToHex(colorRedValue, colorGreenValue, colorBlueValue);
 
 	const getRGBFromHEX = hexCode => {
-		let hex = hexCode.replace('#', '');
-		const redColor = parseInt(hex.substring(0, 2), 16);
-		const greenColor = parseInt(hex.substring(2, 4), 16);
-		const blueColor = parseInt(hex.substring(4, 6), 16);
-		changedColorRed(redColor);
-		changedColorGreen(greenColor);
-		changedColorBlue(blueColor);
+		const { red, green, blue } = convertHexToRgb(hexCode);
+		changedColorRed(red);
+		changedColorGreen(green);
+		changedColorBlue(blue);
 	}
 
 	const detectValue = color =>{
@@ -109,14 +94,14 @@ const ChangeColors = ({ value, onChange }) => {
 				</div>
 	</>);
 
-	console.log('detectRGBColor():::', detectRGBColor())
+	const detectCurrentColor = () => `rgba(${colorRedValue},${colorGreenValue},${colorBlueValue})`;
 	return(
 		<div className="color-picker-rows">
 			<div
 				{...clickable(() => changedMenuVisibility(!isMenuOpen))}
 				className="change-color-color-square-wrapper"
 			>
-				<AppColorSquare value={detectRGBColor()} />
+				<AppColorSquare value={detectCurrentColor()} />
 			</div>
 			{isMenuOpen &&
 			<div
