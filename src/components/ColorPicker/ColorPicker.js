@@ -10,7 +10,10 @@ const ColorPicker = ({ value, onChange, colors }) => {
 	return <div className="color-picker">
 		<span className="color-identification">{value}</span>
 		<ChangeColors />
-		<SelectBasicColors />
+		<SelectBasicColors
+			colors={colors}
+			onChange={onChange}
+		/>
 	</div>
 };
 
