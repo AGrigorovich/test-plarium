@@ -9,7 +9,10 @@ import './ColorPicker.css';
 const ColorPicker = ({ value, onChange, colors }) => {
 	return <div className="color-picker">
 		<span className="color-identification">{value}</span>
-		<ChangeColors />
+		<ChangeColors
+			value={value}
+			onChange={onChange}
+		/>
 		<SelectBasicColors
 			colors={colors}
 			onChange={onChange}

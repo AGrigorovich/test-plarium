@@ -1,7 +1,8 @@
 import React, {useRef, useState} from 'react';
 import PropTypes from 'prop-types';
 
-import AppDropdown from '../SelectColorPicker/AppDropdown';
+import AppDropdown from '../AppDropdown/AppDropdown';
+import AppColorSquare from '../AppColorSquare/AppColorSquare';
 
 import { clickable } from '../../helpers/makeElementClickable';
 import { ComponentMouseDownHandler } from "../../helpers/ComponentMouseDownHandler";
@@ -15,13 +16,10 @@ const renderColors = (colors, handleSelectColor, changedSelectVisibility, select
 			key={id}
 			className="select-color-picker-item"
 			{...clickable(() => handleSelectColor(value))}
-			onMouseDown={ComponentMouseDownHandler(selectRef, () => changedSelectVisibility(false))}
+			onMouseDown={ ComponentMouseDownHandler(selectRef, () => changedSelectVisibility(false)) }
 		>
 			<span>{name}</span>
-			<div
-				className="select-color-picker-color-square"
-				style={{backgroundColor: value}}
-			/>
+			<AppColorSquare value={value} />
 		</div>)
 	)}</>
 
@@ -34,7 +32,9 @@ const SelectBasicColors = ({ colors, onChange }) => {
 	return <div className="color-picker-rows">
 		<div
 			className="arrow-down"
-			{...clickable(() => changedSelectVisibility(!isSelectOpen))}
+			{...clickable(() => {
+				changedSelectVisibility(!isSelectOpen)
+			})}
 		/>
 		{isSelectOpen &&
 			<div
@@ -45,7 +45,7 @@ const SelectBasicColors = ({ colors, onChange }) => {
 					renderPropsElements={() => renderColors(colors, handleSelectColor, changedSelectVisibility, selectRef)}
 				/>
 			</div>
-	}
+		}
 	</div>
 };
 
