@@ -5,18 +5,16 @@ import AppDropdown from '../AppDropdown/AppDropdown';
 import AppColorSquare from '../AppColorSquare/AppColorSquare';
 
 import { clickable } from '../../helpers/makeElementClickable';
-import { ComponentMouseDownHandler } from "../../helpers/ComponentMouseDownHandler";
 
 import './SelectBasicColors.css';
 
-const renderColors = (colors, handleSelectColor, changedSelectVisibility, selectRef) => <>
+const renderColors = (colors, handleSelectColor) => <>
 	{colors.map(({ id, name, value }) => (
 		// we can create component for items, but it's not necessary now
 		<div
 			key={id}
 			className="select-color-picker-item"
 			{...clickable(() => handleSelectColor(value))}
-			onMouseDown={ ComponentMouseDownHandler(selectRef, () => changedSelectVisibility(false)) }
 		>
 			<span>{name}</span>
 			<AppColorSquare value={value} />
@@ -42,7 +40,9 @@ const SelectBasicColors = ({ colors, onChange }) => {
 				className="app-dropdown-wrapper"
 			>
 				<AppDropdown
-					renderPropsElements={() => renderColors(colors, handleSelectColor, changedSelectVisibility, selectRef)}
+					renderPropsElements={() => renderColors(colors, handleSelectColor)}
+					refElement={selectRef}
+					cb={() => changedSelectVisibility(false)}
 				/>
 			</div>
 		}

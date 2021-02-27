@@ -4,8 +4,6 @@ import PropTypes from 'prop-types';
 import AppDropdown from "../AppDropdown/AppDropdown";
 import AppColorSquare from "../AppColorSquare/AppColorSquare";
 
-import {ComponentMouseDownHandler} from "../../helpers/ComponentMouseDownHandler";
-
 import { clickable } from '../../helpers/makeElementClickable';
 import { colorRanges } from '../../constants/colorRanges';
 
@@ -13,7 +11,6 @@ import './ChangeColors.css';
 
 const ChangeColors = ({ value, onChange }) => {
 	const [isMenuOpen, changedMenuVisibility] = useState(false);
-	const [currentColor, changedCurrentColor] = useState(false);
 	const [colorRedValue, changedColorRed] = useState(0);
 	const [colorGreenValue, changedColorGreen] = useState(0);
 	const [colorBlueValue, changedColorBlue] = useState(0);
@@ -36,11 +33,8 @@ const ChangeColors = ({ value, onChange }) => {
 		}
 	}
 
-	const renderInputsRanges = (changedMenuVisibility, changeColorRef) => <>
-		<div
-			onMouseDown={ ComponentMouseDownHandler(changeColorRef, () => changedMenuVisibility(false)) }
-		>
-			<>
+	const renderInputsRanges = () => (
+		<>
 				{colorRanges.map(({ id, name, value }) => (
 					<div
 						key={id}
@@ -59,9 +53,7 @@ const ChangeColors = ({ value, onChange }) => {
 						/>
 					</div>
 				))}
-			</>
-		</div>
-	</>
+	</>)
 
 	useEffect(
 		() => {
@@ -92,7 +84,9 @@ const ChangeColors = ({ value, onChange }) => {
 				className="app-dropdown-wrapper"
 			>
 				<AppDropdown
-					renderPropsElements={() => renderInputsRanges(changedMenuVisibility, changeColorRef)}
+					renderPropsElements={renderInputsRanges}
+					refElement={changeColorRef}
+					cb={() => changedMenuVisibility(false)}
 				/>
 			</div>}
 		</div>)
