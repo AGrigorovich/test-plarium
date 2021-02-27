@@ -1,0 +1,9 @@
+.app-button {
+    width: 5rem;
+    height: 2rem;
+    padding: .5rem;
+    margin: .5rem;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}

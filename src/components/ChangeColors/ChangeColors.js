@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import AppDropdown from "../AppDropdown/AppDropdown";
 import AppColorSquare from "../AppColorSquare/AppColorSquare";
+import AppButton from "../AppButton/AppButton";
 
 import { clickable } from '../../helpers/makeElementClickable';
 import { colorRanges } from '../../constants/colorRanges';
@@ -15,6 +16,25 @@ const ChangeColors = ({ value, onChange }) => {
 	const [colorGreenValue, changedColorGreen] = useState(0);
 	const [colorBlueValue, changedColorBlue] = useState(0);
 	const changeColorRef = useRef(null);
+
+	const detectRGBColor = () => `rgba(${colorRedValue},${colorGreenValue},${colorBlueValue})`;
+
+	const detectHEXColor = () => {
+		const red = colorRedValue.toString(16);
+		const green = colorGreenValue.toString(16);
+		const blue = colorBlueValue.toString(16);
+		return `#${red}${green}${blue}`;
+	};
+
+	const getRGBFromHEX = hexCode => {
+		let hex = hexCode.replace('#', '');
+		const redColor = parseInt(hex.substring(0, 2), 16);
+		const greenColor = parseInt(hex.substring(2, 4), 16);
+		const blueColor = parseInt(hex.substring(4, 6), 16);
+		changedColorRed(redColor);
+		changedColorGreen(greenColor);
+		changedColorBlue(blueColor);
+	}
 
 	const detectValue = color =>{
 		switch(color){
@@ -31,6 +51,22 @@ const ChangeColors = ({ value, onChange }) => {
 			case 'blue': return changedColorBlue(value);
 			default: return null;
 		}
+	}
+
+	useEffect(
+		() => {
+			getRGBFromHEX(value);
+		}, [value]);
+
+	const handleClickCancelButton = () => {
+		getRGBFromHEX(value);
+		changedMenuVisibility(false);
+	}
+
+	const handleClickApplyButton = () => {
+		const currentColor = detectHEXColor();
+		onChange(currentColor);
+		changedMenuVisibility(false);
 	}
 
 	const renderInputsRanges = () => (
@@ -53,22 +89,19 @@ const ChangeColors = ({ value, onChange }) => {
 						/>
 					</div>
 				))}
-	</>)
-
-	useEffect(
-		() => {
-			let hex = value.replace('#', '');
-
-			const redColor = parseInt(hex.substring(0, 2), 16);
-			const greenColor = parseInt(hex.substring(2, 4), 16);
-			const blueColor = parseInt(hex.substring(4, 6), 16);
-			changedColorRed(redColor);
-			changedColorGreen(greenColor);
-			changedColorBlue(blueColor);
-
-		}, [value]);
-
-	const detectCurrentColor = () => `rgba(${colorRedValue},${colorGreenValue},${colorBlueValue})`;
+				<div className="change-colors-buttons-container">
+					<AppButton
+						name="Cancel"
+						handleClick={handleClickCancelButton}
+						backgroundColor="#808080"
+					/>
+					<AppButton
+						name="Ok"
+						handleClick={handleClickApplyButton}
+						backgroundColor="#00ff00"
+					/>
+				</div>
+	</>);
 
 	return(
 		<div className="color-picker-rows">
@@ -76,7 +109,7 @@ const ChangeColors = ({ value, onChange }) => {
 				{...clickable(() => changedMenuVisibility(!isMenuOpen))}
 				className="change-color-color-square-wrapper"
 			>
-				<AppColorSquare value={detectCurrentColor()} />
+				<AppColorSquare value={detectRGBColor()} />
 			</div>
 			{isMenuOpen &&
 			<div

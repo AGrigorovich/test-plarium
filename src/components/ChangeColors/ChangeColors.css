@@ -8,3 +8,9 @@
     align-items: center;
     padding: .75rem .5rem;
 }
+
+.change-colors-buttons-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
