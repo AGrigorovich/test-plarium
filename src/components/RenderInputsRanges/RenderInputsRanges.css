@@ -1,0 +1,12 @@
+.input-range-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+}
+
+.change-colors-buttons-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
