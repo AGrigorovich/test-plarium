@@ -5,4 +5,5 @@
     border-right: .5rem solid transparent;
     border-top: .5rem solid #808080;
     cursor: pointer;
+    outline: none;
 }

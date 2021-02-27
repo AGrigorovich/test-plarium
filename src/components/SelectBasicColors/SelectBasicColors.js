@@ -18,6 +18,7 @@ const SelectBasicColors = ({ colors, onChange }) => {
 		<SelectColorPicker
 			colors={colors}
 			onChange={onChange}
+			changedSelectVisibility={changedSelectVisibility}
 		/>}
 	</div>
 };

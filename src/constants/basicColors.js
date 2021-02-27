@@ -4,5 +4,5 @@ export const basicColors = [
 	{ id: 2, name: 'red', value: '#ff0000' },
 	{ id: 3, name: 'yellow', value: '#ffff00' },
 	{ id: 4, name: 'green', value: '#00ff00' },
-	{ id: 4, name: 'blue', value: '#0000ff' },
+	{ id: 5, name: 'blue', value: '#0000ff' },
 ];
