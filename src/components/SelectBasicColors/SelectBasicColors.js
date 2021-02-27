@@ -8,13 +8,16 @@ import { clickable } from '../../helpers/makeElementClickable';
 
 import './SelectBasicColors.css';
 
-const renderColors = (colors, handleSelectColor) => <>
+const renderColors = (colors, handleSelectColor, changedSelectVisibility) => <>
 	{colors.map(({ id, name, value }) => (
 		// we can create component for items, but it's not necessary now
 		<div
 			key={id}
 			className="select-color-picker-item"
-			{...clickable(() => handleSelectColor(value))}
+			{...clickable(() => {
+				handleSelectColor(value);
+				changedSelectVisibility(false);
+			})}
 		>
 			<span>{name}</span>
 			<AppColorSquare value={value} />
@@ -40,7 +43,7 @@ const SelectBasicColors = ({ colors, onChange }) => {
 				className="app-dropdown-wrapper"
 			>
 				<AppDropdown
-					renderPropsElements={() => renderColors(colors, handleSelectColor)}
+					renderPropsElements={() => renderColors(colors, handleSelectColor, changedSelectVisibility)}
 					refElement={selectRef}
 					cb={() => changedSelectVisibility(false)}
 				/>
