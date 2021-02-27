@@ -1,0 +1,10 @@
+.color-picker {
+    width: 15rem;
+    height: 3rem;
+    border: .1rem solid #000000;
+    border-radius: .25rem;
+    display: flex;
+    align-items: center;
+    padding: .25rem;
+    color: grey;
+}
