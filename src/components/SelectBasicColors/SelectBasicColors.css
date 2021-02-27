@@ -8,10 +8,6 @@
     outline: none;
 }
 
-.app-dropdown-wrapper {
-    display: contents;
-}
-
 .color-picker-rows .select-color-picker-item {
     display: flex;
     align-items: center;

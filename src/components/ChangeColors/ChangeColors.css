@@ -2,3 +2,9 @@
     outline: none;
     cursor: pointer;
 }
+
+.input-range-item {
+    display: flex;
+    align-items: center;
+    padding: .75rem .5rem;
+}
